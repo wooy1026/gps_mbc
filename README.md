@@ -13,4 +13,4 @@ roslaunch gps_mbc mbc.launch
 /latitude_topic  
 /longitude_topic  
 /heading_topic  
-참고) heading_topic은 echo로 확인하여야 함.
+참고)  heading_topic은 echo로 확인하여야 함.  파이썬 권한부여 필요.
