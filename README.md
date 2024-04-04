@@ -6,3 +6,10 @@ https://pypi.org/project/utm/0.4.0/ 파이썬 utm 필요
 
 **[실행]**  
 roslaunch gps_mbc mbc.launch
+
+**[topic list]**  
+/utm_x  
+/utm_y  
+/latitude_topic  
+/longitude_topic  
+/heading_topic  
