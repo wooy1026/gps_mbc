@@ -19,7 +19,6 @@ def listener():
 def parse_nmea_sentence(nmea_sentence):
     parts = nmea_sentence.split(',')
 
-    # 초기값 설정
     heading = None
     latitude = None
     longitude = None
@@ -29,7 +28,7 @@ def parse_nmea_sentence(nmea_sentence):
     if parts[0] == "$GNHDT":
         heading = float(parts[1])
     elif parts[0] == "$GNGGA":
-        if len(parts) > 4:  # 데이터 완전성 검사
+        if len(parts) > 4: # 데이터 완전성 검사
             latitude_data = parts[2]
             longitude_data = parts[4]
 
@@ -49,17 +48,20 @@ def parse_nmea_sentence(nmea_sentence):
 
 # 콜백 함수
 def nmea_callback(msg, pub_heading, pub_latitude, pub_longitude, pub_utm_x, pub_utm_y):
-    nmea_sentence = msg.sentence 
+    nmea_sentence = msg.sentence
     heading, latitude, longitude, utm_coords = parse_nmea_sentence(nmea_sentence)
-
     if heading is not None:
         pub_heading.publish(heading)
+        #print(f"Heading: {heading}")
     if latitude is not None and longitude is not None:
         pub_latitude.publish(latitude)
         pub_longitude.publish(longitude)
+        print(f"__________________________________")
+        print(f"Latitude: {latitude}\nLongitude: {longitude}")
     if utm_coords is not None:
         pub_utm_x.publish(utm_coords[0])
-        pub_utm_y.publish(utm_coords[1]) 
+        pub_utm_y.publish(utm_coords[1])
+        print(f"UTM X: {utm_coords[0]}\nUTM Y: {utm_coords[1]}")
 
 if __name__ == '__main__':
     listener()
